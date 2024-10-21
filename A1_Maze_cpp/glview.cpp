@@ -92,6 +92,8 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
     void glView::CreateMaze(int n, int m) {
         maze_ = new s21::Maze(n, m); //generate maze and run
 //        maze_->Generate(n, m);
+        find_ = new s21::FindPath(*maze_);
+
     }
 
     void glView::EnterPoint(int x, int y){
@@ -107,9 +109,9 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
         point1_[1] = h;
 
         if (point2_[0] != -1) {
-          maze_->FindPath(point1_[0], point1_[1], point2_[0], point2_[1]);
-          std::vector<std::vector<int>> path = maze_->getPath();
-          for(auto elem : maze_->getPath())
+          find_->Find(point1_[0], point1_[1], point2_[0], point2_[1]);
+          std::vector<std::vector<int>> path = find_->getPath();
+          for(auto elem : path)
               for(auto elem2 : elem)
                     qDebug() << elem2;
 

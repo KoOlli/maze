@@ -8,6 +8,7 @@ class glView : public QOpenGLWidget {
   Q_OBJECT
  private:
     s21::Maze *maze_;
+    s21::FindPath *find_;
     int point1_[2] = {-1, -1};
     int point2_[2] = {-1, -1};
     int newPoint_[2] = {-1, -1};
