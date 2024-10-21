@@ -103,24 +103,26 @@ void s21::Maze::Init() {
 void s21::Maze::Generate(int n, int m) {
     Init();
     int setUniqueNumber = col_;
-    std::vector<int> set(row_);
-    // std::iota(set.begin(), set.end(), 1);
+    std::vector<int> set(col_);
+//    std::iota(set.begin(), set.end(), 1);
     // Заполняем вектор значениями от 1 до col_
-    for (int i = 1; i <= col_; ++i) {
-        set.push_back(i); // добавляем элемент в множество
+    for (int i = 1; i < col_; ++i) {
+        set[i-1] = i; // добавляем элемент в множество
     }
 
     for (int row = 0; row < row_; ++row) {
-        if (row > 0) { for (int i = 0; i < col_; ++i) {
-            if (bottomWalls_[row - 1][i] == 1)
-                set[i] = ++setUniqueNumber;
+        if (row > 0) {
+            for (int i = 0; i < col_; ++i) {
+                if (bottomWalls_[row - 1][i] == 1)
+                    set[i] = setUniqueNumber++;
         }
     }
     std::vector<int> rand(col_ * 2);
     for (int i = 0; i < rand.size(); ++i)
-        rand[i] = std::rand() % (BiasMax + 2);
+        rand[i] = random() % (BiasMax + 2);
     for (int i = 0; i < col_; ++i) {
-        if (i < col_ - 1 && (rand[i] < Bias || set[i + 1] == set[i]))
+        if (i < col_ - 1 && (rand[i] == 1 || set[i + 1] == set[i]))
+//        if (i < col_ - 1 && rand[i] == 1)
             rightWalls_[row][i] = 1;
         else if (i < col_ - 1) {
             std::vector<int> newSet; // Создаем пустой вектор для хранения результатов
@@ -134,26 +136,26 @@ void s21::Maze::Generate(int n, int m) {
             set = newSet;
         }
     }
-    for (int i = 0; i < col_; ++i) {
+    for (int i = 0; i < col_; i++) {
         int allSetLength = 0; // Инициализируем счетчик
         // Проходим через все элементы вектора set
         for (int x : set) {
             if (x == set[i]) {
-                ++allSetLength; // Увеличиваем счетчик, если условие выполняется
+                allSetLength++; // Увеличиваем счетчик, если условие выполняется
             }
         }
         int setLength = 0;
-        for (int j = 0; j <= i; ++j) {
+        for (int j = 0; j <= i; j++) {
             // Проходим от 0 до i (включительно)
             if (set[j] == set[i]) {
-                ++setLength; // Увеличиваем счетчик, если условие выполняется
+                setLength++; // Увеличиваем счетчик, если условие выполняется
             }
         }
         int bottomCount = 0;
         for (auto it = bottomWalls_[row].begin() + (i - setLength + 1);
-        it != bottomWalls_[row].begin() + (i + 1); ++it) {
+        it != bottomWalls_[row].begin() + (i + 1); it++) {
             if (*it == 1) { // Сравниваем значение с 1
-                ++bottomCount; // Увеличиваем счетчик, если условие выполняется
+                bottomCount++; // Увеличиваем счетчик, если условие выполняется
             }
         } if (rand[i + col_] > Bias) {
             if ((rightWalls_[row][i] != 1) || (!(bottomCount == setLength - 1) && setLength > 1))

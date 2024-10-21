@@ -41,20 +41,16 @@ class Maze {
     void Generate(int n, int m);
 
 
-//    int FindRoot(int x);
     void unionSets(int  cell1, int cell2);
     bool CanStep(Direction direction, const std::vector<int>& position) const;
     static std::vector<int> NextCell(Direction direction, const std::vector<int>& position);
     static Direction ChangeClockwise(Direction direction);
     static Direction ChangeCounterClockwise(Direction direction);
     bool containsStart(const std::vector<int>& Start);
-//    void pushBackPath(std::pair<int, int> push_) { path_.push_back({push_.first, push_.second}); };
-//    int find(int x);
     void Init();
-//    std::vector<int> parent;
     void PathFinder(int startPosX, int startPosY, int endPosX, int endPosY);
-    int find(int x, std::vector<int>& parent);
-    void unionSet(int x, int y, std::vector<int>& parent);
+//    int find(int x, std::vector<int>& parent);
+//    void unionSet(int x, int y, std::vector<int>& parent);
 
 
  private:
