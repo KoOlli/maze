@@ -3,6 +3,7 @@
 #include <QTimer>
 
 #include <iostream>
+#include<QDebug>>
 //#include "gif.h"
 
 #define GL_SILENCE_DEPRECATION
@@ -29,7 +30,7 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
     void glView::paintGL() {
         // Очистка экрана
        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLineWidth(2);
+        glLineWidth(5);
         // Установка цвета для сетки
         glColor3f(1.0f, 0.0f, 0.0f); // Красный цвет
         if(maze_ != nullptr){
@@ -37,6 +38,7 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
             CreateTopWall();
             CreateRightWalls();
             CreateBottomWalls();
+//            Generate();
             DrawPath(newPoint_[0], newPoint_[1]);
         }
     }
@@ -89,6 +91,7 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
 
     void glView::CreateMaze(int n, int m) {
         maze_ = new s21::Maze(n, m); //generate maze and run
+//        maze_->Generate(n, m);
     }
 
     void glView::EnterPoint(int x, int y){
@@ -106,6 +109,10 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
         if (point2_[0] != -1) {
           maze_->FindPath(point1_[0], point1_[1], point2_[0], point2_[1]);
           std::vector<std::vector<int>> path = maze_->getPath();
+          for(auto elem : maze_->getPath())
+              for(auto elem2 : elem)
+                    qDebug() << elem2;
+
           std::vector<int> currentPoint1 = path[0];
           std::vector<int> currentPoint2 = path[0];
 

@@ -24,6 +24,7 @@ class glView : public QOpenGLWidget {
   void paintGL() override;
 
   void CreateMaze(int n, int m);
+//  void Generate(int n, int m);
 
   void EnterPoint(int x, int y);
   void ClearPoints();

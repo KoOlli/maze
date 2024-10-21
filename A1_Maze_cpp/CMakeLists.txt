@@ -48,6 +48,7 @@ else()
     endif()
 endif()
 
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets OpenGLWidgets)
 target_link_libraries(A1_Maze_cpp PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGLWidgets)
 
 set_target_properties(A1_Maze_cpp PROPERTIES
