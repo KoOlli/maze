@@ -32,13 +32,14 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLineWidth(5);
         // Установка цвета для сетки
-        glColor3f(1.0f, 0.0f, 0.0f); // Красный цвет
+        glColor3f(1.0, 0.0, 0.0); // Красный цвет
         if(maze_ != nullptr){
             CreateLeftWall();
             CreateTopWall();
             CreateRightWalls();
             CreateBottomWalls();
 //            Generate();
+            glColor3f(0.0, 1.0, 0.0);
             DrawPath(newPoint_[0], newPoint_[1]);
         }
     }
@@ -122,9 +123,9 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
             currentPoint1 = item;
             glBegin(GL_LINES);
               glVertex2f(500 / maze_->getCol() / 2 + 500 / maze_->getCol() * currentPoint1[0],
-                                     -230 + 500 / maze_->getRow() / 2 + 500 / maze_->getRow() * currentPoint1[1]);
+                                     500 / maze_->getRow() / 2 + 500 / maze_->getRow() * (maze_->getRow() - currentPoint1[1] - 1));
               glVertex2f(500 / maze_->getCol() / 2 + 500 / maze_->getCol() * currentPoint2[0],
-                                   -230 + 500 / maze_->getRow() / 2 + 500 / maze_->getRow() * currentPoint2[1]);
+                                   500 / maze_->getRow() / 2 + 500 / maze_->getRow() * (maze_->getRow() - currentPoint2[1] - 1));
             glEnd();
             currentPoint2 = currentPoint1;
           }

@@ -22,7 +22,7 @@ void MainWindow::createGridButtons(int n, int m)
         for (int j = 0; j < m; ++j) {
             QPushButton *button = new QPushButton(QString(" "), this);
             connect(button, &QPushButton::clicked, this, [this, i, j]() { MainWindow::buttonClicked(i,j);} );
-            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             ui->gridLayout->addWidget(button, i, j);
         }
     }
