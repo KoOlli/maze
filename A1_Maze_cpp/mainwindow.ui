@@ -131,9 +131,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>137</y>
       <width>501</width>
-      <height>501</height>
+      <height>507</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout"/>

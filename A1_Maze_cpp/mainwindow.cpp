@@ -13,12 +13,34 @@ MainWindow::~MainWindow()
 
 void MainWindow::createGridButtons(int n, int m)
 {
+    clearGrid();
+    ui->gridLayout->setHorizontalSpacing(3);
+    ui->gridLayout->setVerticalSpacing(8);
+    ui->gridLayout->setContentsMargins(2, 2, 2, 2);
+    
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             QPushButton *button = new QPushButton(QString(" "), this);
             connect(button, &QPushButton::clicked, this, [this, i, j]() { MainWindow::buttonClicked(i,j);} );
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             ui->gridLayout->addWidget(button, i, j);
         }
+    }
+
+}
+
+void MainWindow::clearGrid() {
+    // Получить количество строк и столбцов (можно использовать m и n, если сохраняете эти значения)
+    QLayoutItem* item;
+    while ((item = ui->gridLayout->takeAt(0))) {
+        // Удаляем виджет
+        QWidget* widget = item->widget();
+        if (widget) {
+            // Удаление виджета
+            delete widget;
+        }
+        // Удаление самого элемента компоновщика
+        delete item;
     }
 }
 

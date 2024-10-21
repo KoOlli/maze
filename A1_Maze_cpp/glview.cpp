@@ -62,10 +62,10 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
           for (int j = 0; j < maze_->getCol(); j++) {
               if (maze_->getRightWalls()[maze_->getRow() - i - 1][j] == 1) {
                   glBegin(GL_LINES);
-                      glVertex2f(500 / maze_->getCol() + 500 / maze_->getCol() * j,
-                                 500 / maze_->getRow() * i);
-                      glVertex2f(500 / maze_->getCol() + 500 / maze_->getCol() * j,
-                                 500 / maze_->getRow() * (i + 1));
+                      glVertex2f(500 / (float)maze_->getCol() + 500 / (float)maze_->getCol() * j,
+                                 500 / (float)maze_->getRow() * i);
+                      glVertex2f(500 / (float)maze_->getCol() + 500 / (float)maze_->getCol() * j,
+                                 500 / (float)maze_->getRow() * (i + 1));
                   glEnd();
 
               }
@@ -78,10 +78,10 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
           for (int j = 0; j < maze_->getCol(); j++) {
               if (maze_->getBottomWalls()[maze_->getRow() - i - 1][j] == 1) {
                   glBegin(GL_LINES);
-                      glVertex2f(500 / maze_->getCol() * j,
-                                 500 / maze_->getRow()  + 500 / maze_->getRow()  * (i - 1));
-                      glVertex2f(500 / maze_->getCol() * (j + 1),
-                                 500 / maze_->getRow()  + 500 / maze_->getRow()  * (i - 1));
+                      glVertex2f(500 / (float)maze_->getCol() * j,
+                                 500 / (float)maze_->getRow()  + 500 / (float)maze_->getRow()  * (i - 1));
+                      glVertex2f(500 / (float)maze_->getCol() * (j + 1),
+                                 500 / (float)maze_->getRow()  + 500 / (float)maze_->getRow()  * (i - 1));
                   glEnd();
 
               }

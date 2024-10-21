@@ -25,6 +25,7 @@ private slots:
     void on_LoadBtn_clicked();
     void buttonClicked(int i, int j);
     void createGridButtons(int n, int m);
+    void clearGrid();
 
 private:
     Ui::MainWindow *ui;
