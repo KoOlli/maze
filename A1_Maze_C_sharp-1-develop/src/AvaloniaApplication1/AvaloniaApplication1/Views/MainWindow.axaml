@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:vm="using:AvaloniaApplication1.ViewModels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:models="clr-namespace:AvaloniaApplication1.Models" 
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="450" 
+        x:Class="AvaloniaApplication1.Views.MainWindow" 
+        x:DataType="vm:MainWindowViewModel" 
+        Icon="/Assets/avalonia-logo.ico" 
+        Title="AvaloniaApplication1"> 
+
+    <Design.DataContext> 
+        <!-- This only sets the DataContext for the previewer in an IDE, 
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) --> 
+        <vm:MainWindowViewModel/> 
+    </Design.DataContext> 
+
+      
+    <StackPanel >
+        <Grid RowDefinitions="*,*,*" ColumnDefinitions="50,450">
+            <TextBlock Text="Rows:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="0 0"/>  
+            <NumericUpDown Minimum="2" Maximum="50" Grid.Row="0" Grid.Column="1" 
+                               Name="Rows" Margin="0 0" Value="5.0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Cols:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>  
+            <NumericUpDown Minimum="2" Maximum="50" Grid.Row="1" Grid.Column="1" 
+                       Name="Cols" Margin="0 0" Value="5.0" HorizontalAlignment="Left"/> 
+        </Grid>
+        <Button 
+            Grid.Row="2" Grid.Column="0" 
+            HorizontalAlignment="Left" 
+            Background="Silver" Foreground="Black" 
+            Click="StartButtonClicked"> 
+            Create maze! 
+        </Button>
+        <Button 
+            Grid.Row="2" Grid.Column="1" 
+            HorizontalAlignment="Right" 
+            Background="Silver" Foreground="Black" 
+            Click="SaveButton_Click"> 
+            Save file 
+        </Button>
+        <Button 
+            Grid.Row="2" Grid.Column="1" 
+            HorizontalAlignment="Right" 
+            Background="Silver" Foreground="Black" 
+            Click="LoadButton_Click"> 
+            Load file 
+        </Button> 
+        <Grid Name="chessGrid"/> 
+    </StackPanel> 
+</Window> 
