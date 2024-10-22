@@ -15,7 +15,7 @@ std::vector<std::vector<int>> s21::FindPath::Find(int startPosX, int startPosY, 
     currentPosition = {startPosX, startPosY};
 
     Direction currentDirection = Direction::Left;
-
+    path__.clear();
     while (currentPosition != End) {
         path__.push_back(currentPosition);
 

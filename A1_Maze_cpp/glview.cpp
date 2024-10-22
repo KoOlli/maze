@@ -108,7 +108,7 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
         point2_[1] = point1_[1];
         point1_[0] = w;
         point1_[1] = h;
-
+        std::cout << point1_[0] << " " << point1_[1] << " " << point2_[0] << " " << point2_[1] << std::endl;
         if (point2_[0] != -1) {
           find_->Find(point1_[0], point1_[1], point2_[0], point2_[1]);
           std::vector<std::vector<int>> path = find_->getPath();
@@ -122,10 +122,10 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
           for(auto item : path) {
             currentPoint1 = item;
             glBegin(GL_LINES);
-              glVertex2f(500 / maze_->getCol() / 2 + 500 / maze_->getCol() * currentPoint1[0],
-                                     500 / maze_->getRow() / 2 + 500 / maze_->getRow() * (maze_->getRow() - currentPoint1[1] - 1));
-              glVertex2f(500 / maze_->getCol() / 2 + 500 / maze_->getCol() * currentPoint2[0],
-                                   500 / maze_->getRow() / 2 + 500 / maze_->getRow() * (maze_->getRow() - currentPoint2[1] - 1));
+              glVertex2f(500 / (float)maze_->getCol() / 2 + 500 / (float)maze_->getCol() * currentPoint1[0],
+                                     500 / (float)maze_->getRow() / 2 + 500 / (float)maze_->getRow() * (maze_->getRow() - currentPoint1[1] - 1));
+              glVertex2f(500 / (float)maze_->getCol() / 2 + 500 / (float)maze_->getCol() * currentPoint2[0],
+                                   500 / (float)maze_->getRow() / 2 + 500 / (float)maze_->getRow() * (maze_->getRow() - currentPoint2[1] - 1));
             glEnd();
             currentPoint2 = currentPoint1;
           }
@@ -133,6 +133,7 @@ glView::glView(QWidget* parent) : QOpenGLWidget(parent) {}
     }
 
     void glView::ClearPoints(){
-
+        point2_[0] = point1_[0] = newPoint_[0] = -1;
+        point2_[1] = point1_[1] = newPoint_[1] = -1;
     }
 

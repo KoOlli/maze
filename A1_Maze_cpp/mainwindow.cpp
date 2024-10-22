@@ -4,6 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) : ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->CreatePathBtn->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -26,7 +27,20 @@ void MainWindow::createGridButtons(int n, int m)
             ui->gridLayout->addWidget(button, i, j);
         }
     }
+    setButtonsVisibility(false);
+}
 
+void MainWindow::setButtonsVisibility(bool visible)
+{
+    for (int i = 0; i < ui->gridLayout->rowCount(); ++i) {
+        for (int j = 0; j < ui->gridLayout->columnCount(); ++j) {
+            if (ui->gridLayout->itemAtPosition(i, j)) {
+                if (ui->gridLayout->itemAtPosition(i, j)->widget()) {
+                    ui->gridLayout->itemAtPosition(i, j)->widget()->setVisible(visible);
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::clearGrid() {
@@ -49,13 +63,21 @@ void MainWindow::on_CreateBtn_clicked()
     int n = (int)ui->spinBox->value();
     int m = (int)ui->spinBox_2->value();
     ui->openGLWidget->CreateMaze(n, m);
-    ui->openGLWidget->repaint();
     createGridButtons(n, m);
+    ui->openGLWidget->ClearPoints();
+    setButtonsVisibility(false);
+    countClick = 0;
+    ui->openGLWidget->repaint();
+    ui->CreatePathBtn->setVisible(true);
 }
 
 void MainWindow::buttonClicked(int i, int j){
     std::cout << i << j << std::endl;
     ui->openGLWidget->EnterPoint(i, j);
+    countClick++;
+    if(countClick == 2){
+        setButtonsVisibility(false);
+    }
 }
 
 void MainWindow::on_SaveBtn_clicked()
@@ -67,5 +89,14 @@ void MainWindow::on_SaveBtn_clicked()
 void MainWindow::on_LoadBtn_clicked()
 {
 
+}
+
+
+void MainWindow::on_CreatePathBtn_clicked()
+{
+    setButtonsVisibility(true);
+    countClick = 0;
+    ui->openGLWidget->ClearPoints();
+    ui->openGLWidget->repaint();
 }
 
