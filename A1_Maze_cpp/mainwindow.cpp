@@ -23,7 +23,6 @@ void MainWindow::createGridButtons(int n, int m)
         for (int j = 0; j < m; ++j) {
             QPushButton *button = new QPushButton(QString(" "), this);
             connect(button, &QPushButton::clicked, this, [this, i, j]() { MainWindow::buttonClicked(i,j);} );
-//            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             ui->gridLayout->addWidget(button, i, j);
         }
     }
@@ -44,16 +43,12 @@ void MainWindow::setButtonsVisibility(bool visible)
 }
 
 void MainWindow::clearGrid() {
-    // Получить количество строк и столбцов (можно использовать m и n, если сохраняете эти значения)
     QLayoutItem* item;
     while ((item = ui->gridLayout->takeAt(0))) {
-        // Удаляем виджет
         QWidget* widget = item->widget();
         if (widget) {
-            // Удаление виджета
             delete widget;
         }
-        // Удаление самого элемента компоновщика
         delete item;
     }
 }
@@ -71,8 +66,8 @@ void MainWindow::on_CreateBtn_clicked()
 void MainWindow::buttonClicked(int i, int j){
     std::cout << i << j << std::endl;
     ui->openGLWidget->EnterPoint(i, j);
-    countClick++;
-    if(countClick == 2){
+    countClick_++;
+    if(countClick_ == 2){
         setButtonsVisibility(false);
     }
 }
@@ -100,7 +95,7 @@ void MainWindow::on_CreatePathBtn_clicked()
 
 void MainWindow::ButtonsView(bool isVisible){
     setButtonsVisibility(isVisible);
-    countClick = 0;
+    countClick_ = 0;
     ui->openGLWidget->ClearPoints();
     ui->openGLWidget->repaint();
 }

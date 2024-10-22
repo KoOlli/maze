@@ -24,7 +24,7 @@ set(PROJECT_SOURCES
         maze.cpp
         maze.h
         findpath.cpp
-#        findpath.h
+        findpath.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
