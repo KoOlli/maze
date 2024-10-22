@@ -64,7 +64,6 @@ void MainWindow::on_CreateBtn_clicked()
 }
 
 void MainWindow::buttonClicked(int i, int j){
-    std::cout << i << j << std::endl;
     ui->openGLWidget->EnterPoint(i, j);
     countClick_++;
     if(countClick_ == 2){

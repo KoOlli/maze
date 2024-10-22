@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef A1_MAZE_CPP_MAINWINDOW_H_
+#define A1_MAZE_CPP_MAINWINDOW_H_
 
 #include <QMainWindow>
 
@@ -37,4 +37,4 @@ private:
     void setButtonsVisibility(bool visible);
 
 };
-#endif // MAINWINDOW_H
+#endif // A1_MAZE_CPP_MAINWINDOW_H_
