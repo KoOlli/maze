@@ -116,3 +116,95 @@ void s21::Maze::Generate(int n, int m) {
         }
     }
 }
+
+void s21::Maze::Save(const std::string& path) {
+        std::ostringstream stringStream;
+        stringStream << row_ << " " << col_ << std::endl;
+
+        // Сохранение стен справа
+        for (int i = 0; i < row_; ++i) {
+            std::vector<std::string> rowValues;
+            for (int j = 0; j < col_; ++j) {
+                rowValues.push_back(std::to_string(rightWalls_[i][j]));
+            }
+            stringStream << Join(rowValues, " ") << std::endl;
+        }
+        stringStream << std::endl;
+
+        // Сохранение стен снизу
+        for (int i = 0; i < row_; ++i) {
+            std::vector<std::string> rowValues;
+            for (int j = 0; j < col_; ++j) {
+                rowValues.push_back(std::to_string(bottomWalls_[i][j]));
+            }
+            stringStream << Join(rowValues, " ") << std::endl;
+        }
+
+        // Запись в файл
+        std::ofstream outFile(path);
+        if (outFile) {
+            outFile << stringStream.str();
+            outFile.close();
+        } else {
+            // Обработка ошибки открытия файла
+            std::cerr << "Error opening file for writing: " << path << std::endl;
+        }
+        std::cout << "file save" << std::endl;
+        std::filesystem::path currentPath = std::filesystem::current_path();
+        std::cout << "Current path: " << currentPath << std::endl;
+    }
+
+std::string s21::Maze::Join(const std::vector<std::string>& strings, const std::string& delimiter) {
+    std::ostringstream result;
+    for (size_t i = 0; i < strings.size(); ++i) {
+        result << strings[i];
+        if (i < strings.size() - 1) {
+            result << delimiter; // добавляем разделитель, если это не последний элемент
+        }
+    }
+    return result.str();
+}
+
+void s21::Maze::ReadFromFile(const std::string& path) {
+    bottomWalls_.clear();
+    rightWalls_.clear();
+    //path__.clear();
+
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        throw std::runtime_error("Could not open the file.");
+    }
+
+    std::vector<std::string> lines;
+    std::string line;
+    while (std::getline(file, line)) {
+        lines.push_back(line);
+    }
+    file.close();
+
+    if (lines.empty()) {
+        throw std::runtime_error("Incorrect file format.");
+    }
+
+    std::istringstream firstLine(lines[0]);
+    firstLine >> row_ >> col_;
+
+    if (lines.size() != row_ * 2 + 2) {
+        throw std::runtime_error("Incorrect file format.");
+    }
+
+    for (int i = 0; i < row_; ++i) {
+        bottomWalls_.push_back(ParseLine(lines[i + row_ + 2]));
+        rightWalls_.push_back(ParseLine(lines[i + 1]));
+    }
+}
+
+std::vector<int> s21::Maze::ParseLine(const std::string& line) {
+    std::vector<int> result;
+    std::istringstream ss(line);
+    int value;
+    while (ss >> value) {
+        result.push_back(value);
+    }
+    return result;
+}

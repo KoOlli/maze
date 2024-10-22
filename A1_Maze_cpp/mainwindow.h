@@ -29,10 +29,10 @@ private slots:
     void clearGrid();
     void on_CreatePathBtn_clicked();
 
-
 private:
     Ui::MainWindow *ui;
     int countClick = 0;
+    void ButtonsView(bool isVisible);
 
 };
 #endif // MAINWINDOW_H

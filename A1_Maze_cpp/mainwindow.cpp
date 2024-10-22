@@ -64,10 +64,7 @@ void MainWindow::on_CreateBtn_clicked()
     int m = (int)ui->spinBox_2->value();
     ui->openGLWidget->CreateMaze(n, m);
     createGridButtons(n, m);
-    ui->openGLWidget->ClearPoints();
-    setButtonsVisibility(false);
-    countClick = 0;
-    ui->openGLWidget->repaint();
+    ButtonsView(false);
     ui->CreatePathBtn->setVisible(true);
 }
 
@@ -82,19 +79,27 @@ void MainWindow::buttonClicked(int i, int j){
 
 void MainWindow::on_SaveBtn_clicked()
 {
-
+    ui->openGLWidget->SaveFile();
 }
 
 
 void MainWindow::on_LoadBtn_clicked()
 {
-
+    ui->openGLWidget->CreateMaze(2,2);
+    ui->openGLWidget->LoadFile();
+    createGridButtons(ui->openGLWidget->getRow(), ui->openGLWidget->getCol());
+    ButtonsView(false);
+    ui->CreatePathBtn->setVisible(true);
 }
 
 
 void MainWindow::on_CreatePathBtn_clicked()
 {
-    setButtonsVisibility(true);
+    ButtonsView(true);
+}
+
+void MainWindow::ButtonsView(bool isVisible){
+    setButtonsVisibility(isVisible);
     countClick = 0;
     ui->openGLWidget->ClearPoints();
     ui->openGLWidget->repaint();

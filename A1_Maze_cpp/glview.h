@@ -18,6 +18,7 @@ class glView : public QOpenGLWidget {
     void CreateBottomWalls();
     void DrawPath(int h, int w);
 
+
  public:
   glView(QWidget* parent = nullptr);
   void initializeGL() override;
@@ -26,9 +27,12 @@ class glView : public QOpenGLWidget {
 
   void CreateMaze(int n, int m);
 //  void Generate(int n, int m);
-
+    void SaveFile();
+    void LoadFile();
   void EnterPoint(int x, int y);
   void ClearPoints();
+  int getRow();
+  int getCol();
 };
 
 #endif  // GLVIEW_H

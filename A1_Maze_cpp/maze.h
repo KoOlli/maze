@@ -11,6 +11,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
 
 namespace s21 {
 
@@ -38,8 +40,10 @@ class Maze {
 
 //    std::vector<std::vector<int>> FindPath(int startPosX, int startPosY, int endPosX, int endPosY);
     void Generate(int n, int m);
-
-
+    void Save(const std::string& path);
+    std::string Join(const std::vector<std::string>& strings, const std::string& delimiter);
+    void ReadFromFile(const std::string& path);
+    std::vector<int> ParseLine(const std::string& line);
     void unionSets(int  cell1, int cell2);
 
     void Init();
