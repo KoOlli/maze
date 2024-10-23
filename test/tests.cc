@@ -75,7 +75,7 @@ TEST(Maze, SaveFileNotEmpty) {
   }
   file.close();
   int expected = 0;
-  ASSERT_NE(lines.size(), expected);  
+  ASSERT_NE(lines.size(), expected);
 }
 
 TEST(Maze, SaveFileSize) {
@@ -97,8 +97,8 @@ TEST(Maze, SaveFileSize) {
   int expectedRow = 0;
   int expectedCol = 0;
   firstLine >> expectedRow >> expectedCol;
-  ASSERT_EQ(maze->getRow(), expectedRow);  
-  ASSERT_EQ(maze->getCol(), expectedCol);  
+  ASSERT_EQ(maze->getRow(), expectedRow);
+  ASSERT_EQ(maze->getCol(), expectedCol);
 }
 
 int main(int argc, char **argv) {

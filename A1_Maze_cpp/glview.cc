@@ -25,7 +25,7 @@ void glView::resizeGL(int w, int h) {
 
 void glView::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glLineWidth(5);
+  glLineWidth(2);
   glColor3f(1.0, 0.0, 0.0);
   if (maze_ != nullptr) {
     CreateLeftWall();
@@ -131,10 +131,19 @@ void glView::ClearPoints() {
   point2_[1] = point1_[1] = newPoint_[1] = -1;
 }
 
-void glView::SaveFile() { maze_->Save("settings.txt"); }
+void glView::SaveFile() {
+  //  std::filesystem::path currentPath = std::filesystem::current_path();
+  // QFile file(currentPath + "settings.txt");
+  QString appDir = QCoreApplication::applicationDirPath();
+  std::cout << appDir.toStdString() << std::endl;
+  maze_->Save(appDir.toStdString() + "/settings.txt");
+}
 
 void glView::LoadFile() {
-  maze_->ReadFromFile("settings.txt");
+  //    std::filesystem::path currentPath = std::filesystem::current_path();
+  QString appDir = QCoreApplication::applicationDirPath();
+  std::cout << appDir.toStdString() << std::endl;
+  maze_->ReadFromFile(appDir.toStdString() + "/settings.txt");
   repaint();
 }
 

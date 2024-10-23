@@ -1,21 +1,8 @@
 ﻿#include "maze.h"
 
-#include <algorithm>
-#include <random>
-
 s21::Maze::Maze(int row, int col) {
   row_ = row;
   col_ = col;
-
-  Generate(row_, col_);
-}
-
-s21::Maze::Maze(int row, int col, int bias) {
-  row_ = row > 0 ? row <= 50 ? row : 50 : 1;
-  col_ = col > 0 ? col <= 50 ? col : 50 : 1;
-
-  bias_ = bias;
-  biasMax_ = 100;
 
   Generate(row_, col_);
 }
@@ -134,10 +121,10 @@ void s21::Maze::Save(const std::string& path) {
   if (outFile) {
     outFile << stringStream.str();
     outFile.close();
+    std::cout << "Good opening file for writing: " << path << std::endl;
   } else {
     std::cerr << "Error opening file for writing: " << path << std::endl;
   }
-  std::filesystem::path currentPath = std::filesystem::current_path();
 }
 
 std::string s21::Maze::Join(const std::vector<std::string>& strings,

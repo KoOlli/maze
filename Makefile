@@ -13,11 +13,14 @@ TEST_FILE = test/tests.cc
 TEST_OUT = tests
 INSTALL_FOLDER = Maze_v1.0
 
-all: install dvi
+all: uninstall install dvi run
 
 install: uninstall
 	mkdir ../../$(INSTALL_FOLDER)
 	cd ../../$(INSTALL_FOLDER) && cmake $(PROJECT)/$(SOURCE_BUILD)/. -B . && cmake --build .
+
+run:
+	open ../../Maze_v1.0/A1_Maze_cpp.app
 
 uninstall: 
 	rm -rf ../../$(INSTALL_FOLDER)
@@ -26,10 +29,10 @@ dvi:
 	open -a "Google Chrome" manual.html
 
 dist: cleandist install
-	cd ../../ && tar -cvf s21_viewer.tar.gz $(INSTALL_FOLDER)
+	cd ../../ && tar -cvf s21_maze.tar.gz $(INSTALL_FOLDER)
 
 cleandist:
-	rm -rf ../../s21_viewer.tar.gz
+	rm -rf ../../s21_maze.tar.gz
 
 clean:
 	rm -rf ./$(TEST_OUT) *.gcno *.gcda *.a *.o report

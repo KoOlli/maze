@@ -4,6 +4,9 @@
 #include <QOpenGLWidget>
 #include "maze.h"
 #include "findPath.h"
+#include <QFile>
+#include <QDir>
+#include <QCoreApplication>
 
 class glView : public QOpenGLWidget {
   Q_OBJECT
