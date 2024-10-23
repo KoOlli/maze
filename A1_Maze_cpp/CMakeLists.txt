@@ -15,15 +15,15 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets OpenGLWidgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets OpenGLWidgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
+        main.cc
+        mainwindow.cc
         mainwindow.h
         mainwindow.ui
-        glview.cpp
+        glview.cc
         glview.h
-        maze.cpp
+        maze.cc
         maze.h
-        findpath.cpp
+        findpath.cc
         findpath.h
 )
 
