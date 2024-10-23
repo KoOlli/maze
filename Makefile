@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror
 FLAGS_TEST = -coverage -lgtest -lgtest_main -pthread
 PROJECT = $(shell pwd)
 SOURCE_BUILD = A1_Maze_cpp
-SOURCES = A1_Maze_cpp/maze.cc A1_Maze_cpp/filepath.cc 
+SOURCES = A1_Maze_cpp/maze.cc A1_Maze_cpp/findpath.cc 
 A_FILES = maze.a
 O_FILES = maze.o
 TEST_FILE = test/tests.cc
@@ -35,14 +35,14 @@ clean:
 	rm -rf ./$(TEST_OUT) *.gcno *.gcda *.a *.o report
 
 test: clean 
-	g++ $(SOURCES) $(TEST_FILE) $(FLAGS_TEST) -o $(TEST_OUT)
+	$(CC) $(SOURCES) $(TEST_FILE) $(FLAGS_TEST) -o $(TEST_OUT)
 	./$(TEST_OUT)
 
 gcov_report: test
 	mkdir report
 	gcovr -r .. --html --html-details -o report/index.html
-	# lcov --no-external --directory ./ --capture --output-file report.info
-	# genhtml report.info --output-directory report
+# lcov --no-external --directory ./ --capture --output-file report.info
+# genhtml report.info --output-directory report
 	rm -rf *.gcno *.info *.gcda
 	open report/index.html
 

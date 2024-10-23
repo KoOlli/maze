@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 namespace s21 {
 
